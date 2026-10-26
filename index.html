@@ -27,7 +27,7 @@
     
     .hospital-header {
       text-align: center;
-      margin-bottom: 20px;
+      margin-bottom: 25px;
       padding-bottom: 15px;
       border-bottom: 3px solid var(--primary-color);
       position: relative;
@@ -43,20 +43,42 @@
     .dark-mode .hospital-header h1 { color: #38bdf8; }
     .hospital-header p { margin: 5px 0 0 0; font-size: 14px; font-weight: 600; opacity: 0.8; }
 
-    .top-controls {
-      position: absolute; right: 0; top: 0;
-      display: flex; gap: 10px; align-items: center;
+    .top-action-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: var(--card-bg);
+      padding: 12px 20px;
+      border-radius: 10px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+      margin-bottom: 25px;
+      flex-wrap: wrap;
+      gap: 15px;
+      border-top: 4px solid #0d9488;
     }
+
+    .top-nav-group {
+      display: flex;
+      gap: 10px;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+
     .network-badge {
       padding: 6px 12px; border-radius: 20px; font-weight: bold; font-size: 12px;
     }
     .net-online { background: #dcfce7; color: #15803d; border: 1px solid #22c55e; }
     .net-offline { background: #fee2e2; color: #b91c1c; border: 1px solid #ef4444; }
 
-    .theme-toggle, .auth-btn {
+    .action-btn {
       background: var(--primary-color); color: white; border: none;
-      padding: 8px 12px; border-radius: 20px; cursor: pointer; font-weight: bold; font-size: 12px;
+      padding: 9px 16px; border-radius: 6px; cursor: pointer; font-weight: bold; font-size: 13px;
+      display: inline-flex; align-items: center; gap: 6px; box-shadow: 0 2px 5px rgba(0,0,0,0.1);
     }
+    .action-btn:hover { opacity: 0.9; }
+    .btn-purchase { background-color: #0d9488; }
+    .btn-edit-mode { background-color: #0284c7; }
+    .btn-theme { background-color: #64748b; }
 
     .stats-grid {
       display: grid;
@@ -86,13 +108,14 @@
     input, select, textarea { width: 100%; padding: 10px 12px; border: 1px solid var(--border-color); border-radius: 6px; font-size: 14px; background-color: var(--card-bg); color: var(--text-color); }
     input[readonly] { background-color: rgba(0,0,0,0.05); cursor: not-allowed; font-weight: bold; }
     
-    button { background-color: #0284c7; color: white; border: none; padding: 12px 20px; font-size: 15px; border-radius: 6px; cursor: pointer; font-weight: bold; width: 100%; }
-    button:hover { background-color: #0369a1; }
+    button[type="submit"] { background-color: #0284c7; color: white; border: none; padding: 12px 20px; font-size: 15px; border-radius: 6px; cursor: pointer; font-weight: bold; width: 100%; }
+    button[type="submit"]:hover { background-color: #0369a1; }
     
     .filter-bar { display: flex; gap: 15px; background: rgba(0,0,0,0.03); padding: 15px; border-radius: 8px; margin-bottom: 15px; flex-wrap: wrap; align-items: flex-end; }
     .filter-item { flex: 1; min-width: 200px; }
-    .export-btn { background-color: #10b981; width: auto; padding: 10px 15px; font-size: 13px; }
-    .view-pdf-btn { background-color: #8b5cf6; width: auto; padding: 10px 15px; font-size: 13px; }
+    .export-btn { background-color: #10b981; width: auto; padding: 10px 15px; font-size: 13px; color:white; border:none; border-radius:6px; font-weight:bold; cursor:pointer; }
+    .view-pdf-btn { background-color: #8b5cf6; width: auto; padding: 10px 15px; font-size: 13px; color:white; border:none; border-radius:6px; font-weight:bold; cursor:pointer; }
+    .history-btn { background-color: #f59e0b; width: auto; padding: 10px 15px; font-size: 13px; color:white; border:none; border-radius:6px; font-weight:bold; cursor:pointer; }
 
     .table-container { overflow-x: auto; }
     table { width: 100%; border-collapse: collapse; margin-top: 10px; background: var(--card-bg); }
@@ -112,6 +135,16 @@
       color: #38bdf8;
     }
 
+    .invoice-subtotal-row {
+      background-color: #f1f5f9;
+      font-weight: bold;
+      color: #047857;
+    }
+    .dark-mode .invoice-subtotal-row {
+      background-color: #1e293b;
+      color: #34d399;
+    }
+
     select.status-pending { color: #dc2626; font-weight: 800; border: 2px solid #ef4444; }
     select.status-progress { color: #d97706; font-weight: 800; border: 2px solid #f59e0b; }
     select.status-solved { color: #16a34a; font-weight: 800; border: 2px solid #22c55e; }
@@ -128,37 +161,63 @@
       width: 100%; height: 100%; overflow: auto; background-color: rgba(0,0,0,0.75);
     }
     .modal-content {
-      background-color: var(--card-bg); margin: 1% auto; padding: 20px;
-      border: 1px solid var(--border-color); width: 95%; max-width: 1200px;
-      border-radius: 10px; max-height: 95vh; display: flex; flex-direction: column;
+      background-color: var(--card-bg); margin: 1% auto; padding: 25px;
+      border: 1px solid var(--border-color); width: 95%; max-width: 1250px;
+      border-radius: 12px; max-height: 95vh; display: flex; flex-direction: column;
       overflow-y: auto;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.2);
     }
     .close-btn { color: #aaa; float: right; font-size: 28px; font-weight: bold; cursor: pointer; text-align: right; }
     .close-btn:hover { color: #ef4444; }
 
     .inv-editor-grid {
-      display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 10px;
-      background: #f1f5f9; padding: 15px; border-radius: 8px; margin-bottom: 15px;
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px;
+      background: #f8fafc; padding: 20px; border-radius: 10px; margin-bottom: 20px;
+      border: 1px solid var(--border-color);
     }
+    .dark-mode .inv-editor-grid { background: #0f172a; }
     .inv-editor-grid input, .inv-editor-grid select {
-      padding: 6px; font-size: 12px;
+      padding: 8px 10px; font-size: 13px;
     }
     .add-inv-btn {
-      background-color: #10b981; color: white; border: none; border-radius: 6px; font-weight: bold; cursor: pointer; padding: 8px; font-size: 13px;
+      background-color: #0d9488; color: white; border: none; border-radius: 6px; font-weight: bold; cursor: pointer; padding: 10px; font-size: 13px;
     }
+
+    @media print {
+      body { background: white; color: black; padding: 0; }
+      .top-action-bar, .card:first-of-type, .filter-bar, button, .action-btn-group, .stats-grid { display: none !important; }
+      .card { border: none; box-shadow: none; margin: 0; padding: 0; }
+      table { border-collapse: collapse; width: 100%; }
+      th, td { border: 1px solid #333; color: black; font-size: 11px; padding: 6px; }
+      th { background-color: #0f172a !important; color: white !important; -webkit-print-color-adjust: exact; }
+      .print-header { display: block !important; text-align: center; margin-bottom: 20px; border-bottom: 2px solid #0284c7; padding-bottom: 10px; }
+    }
+    .print-header { display: none; }
   </style>
 </head>
 <body>
 
 <div class="container">
   <div class="hospital-header">
-    <div class="top-controls">
-      <span id="netStatus" class="network-badge net-online">🟢 Online</span>
-      <button id="authBtn" class="auth-btn" onclick="toggleBiomedEditMode()">🔒 Biomed Edit Mode</button>
-      <button class="theme-toggle" onclick="toggleTheme()">🌙 Theme</button>
-    </div>
     <h1>🏥 NORVIK HOSPITAL LTD</h1>
-    <p>Biomedical Maintenance, Asset Inventory & Breakdown Portal</p>
+    <p>Biomedical Maintenance, Asset Inventory & Grouped Invoice Register</p>
+  </div>
+
+  <div class="top-action-bar">
+    <div style="display: flex; align-items: center; gap: 15px;">
+      <span id="netStatus" class="network-badge net-online">🟢 Online</span>
+    </div>
+    <div class="top-nav-group">
+      <button class="action-btn btn-purchase" onclick="openPurchasesModal()">🛒 Purchases & Grouped Invoices</button>
+      <button id="authBtn" class="action-btn btn-edit-mode" onclick="toggleBiomedEditMode()">🔒 Biomed Edit Mode</button>
+      <button class="action-btn btn-theme" onclick="toggleTheme()">🌙 Theme</button>
+    </div>
+  </div>
+
+  <div class="print-header">
+    <h2 style="text-align:center; color:#0369a1; margin:0;">NORVIK HOSPITAL LTD</h2>
+    <p style="text-align:center; margin:5px 0; font-weight:bold;">Official Biomedical Maintenance & Service Report</p>
+    <p style="text-align:center; font-size:12px; margin:0; opacity:0.8;" id="printReportMeta"></p>
   </div>
 
   <div class="stats-grid">
@@ -215,7 +274,8 @@
 
         <div class="form-group">
           <label for="machineModel">Machine Name & Model:</label>
-          <input type="text" id="machineModel" placeholder="e.g. Philips Defibrillator XL" required>
+          <input type="text" id="machineModel" placeholder="e.g. Philips Defibrillator XL" list="machineSuggestionsList" required>
+          <datalist id="machineSuggestionsList"></datalist>
         </div>
 
         <div class="form-group">
@@ -269,9 +329,11 @@
         <input type="month" id="filterMonth" onchange="loadComplaints()">
       </div>
 
-      <div class="filter-item" style="display: flex; gap: 10px; align-items: flex-end;">
+      <div class="filter-item" style="display: flex; gap: 8px; align-items: flex-end; flex-wrap: wrap;">
         <button type="button" class="view-pdf-btn" onclick="openInventoryModal()">📄 View / Edit Inventory</button>
-        <button type="button" class="export-btn" onclick="exportToCSV()">📥 Download Excel Report</button>
+        <button type="button" class="history-btn" onclick="openMachineHistoryModal()">📊 Machine History</button>
+        <button type="button" class="view-pdf-btn" style="background-color:#0284c7;" onclick="printPDFReport()">🖨️ Download / Print PDF</button>
+        <button type="button" class="export-btn" onclick="exportToCSV()">📥 Download Excel</button>
       </div>
     </div>
 
@@ -372,216 +434,174 @@
   </div>
 </div>
 
+<!-- Modal for Quick Machine Maintenance History -->
+<div id="historyModal" class="modal">
+  <div class="modal-content">
+    <div>
+      <span class="close-btn" onclick="closeMachineHistoryModal()">&times;</span>
+      <h3 style="margin: 0 0 15px 0; color: #0284c7;">📊 Quick Machine Breakdown & Service History Search</h3>
+    </div>
+    
+    <div style="margin-bottom: 15px; display: flex; gap: 15px; align-items: center; flex-wrap: wrap;">
+      <div style="flex: 1; min-width: 250px;">
+        <label>Search Machine Name, Serial No, or Model Number:</label>
+        <input type="text" id="historySearchInput" placeholder="Type Machine Name, Model, or Serial No..." list="historyOptionsDatalist" oninput="filterMachineHistory()">
+        <datalist id="historyOptionsDatalist"></datalist>
+      </div>
+    </div>
+
+    <div style="overflow-x: auto; flex: 1; max-height: 60vh;">
+      <table style="width: 100%; border-collapse: collapse; font-size: 12px;">
+        <thead>
+          <tr style="background:#0f172a; color:white;">
+            <th>Complaint ID</th>
+            <th>Department</th>
+            <th>Machine Name</th>
+            <th>Incharge</th>
+            <th>Complaint Date</th>
+            <th>Problem Description</th>
+            <th>Status</th>
+            <th>Solving Date</th>
+            <th>Remarks</th>
+          </tr>
+        </thead>
+        <tbody id="historyTableBody">
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<!-- Modal for Professional Biomedical Purchases & Grouped Invoices -->
+<div id="purchasesModal" class="modal">
+  <div class="modal-content">
+    <div>
+      <span class="close-btn" onclick="closePurchasesModal()">&times;</span>
+      <h3 style="margin: 0 0 10px 0; color: #0d9488;">🛒 NORVIK HOSPITAL LTD - Biomedical Purchases & Grouped Invoice Register</h3>
+    </div>
+
+    <div class="inv-editor-grid" style="background: #ecfdf5;">
+      <div>
+        <label>Hospital Name:</label>
+        <input type="text" id="purHospital" value="NORVIK HOSPITAL LTD" readonly style="font-weight:bold; background:#e2e8f0;">
+      </div>
+      <div>
+        <label>Department Name:</label>
+        <select id="purDept">
+          <option value="01. LABORATORY DEPARTMENT">01. LABORATORY DEPARTMENT</option>
+          <option value="02. RADIOLOGICAL DEPARTMENT">02. RADIOLOGICAL DEPARTMENT</option>
+          <option value="03. EMERGENCY DEPARTMENT">03. EMERGENCY DEPARTMENT</option>
+          <option value="06. ICU DEPARTMENT">06. ICU DEPARTMENT</option>
+          <option value="08. NICU DEPARTMENT">08. NICU DEPARTMENT</option>
+          <option value="09. MATERNITY WARD">09. MATERNITY WARD</option>
+          <option value="10. DIALYSIS DEPARTMENT">10. DIALYSIS DEPARTMENT</option>
+          <option value="12. OPERATION THEATRE (OT) DEPARTMENT">12. OPERATION THEATRE (OT) DEPARTMENT</option>
+          <option value="14. MANIFOLD ROOM">14. MANIFOLD ROOM</option>
+          <option value="15. BIOMEDICAL WORKSHOP">15. BIOMEDICAL WORKSHOP</option>
+        </select>
+      </div>
+      <div>
+        <label>Order / Purchase Date:</label>
+        <input type="date" id="purDate">
+      </div>
+      <div>
+        <label>Invoice Number / LPO No:</label>
+        <input type="text" id="purInvoiceNo" placeholder="e.g. INV-98425" required>
+      </div>
+      <div>
+        <label>Category / Item Type:</label>
+        <select id="purCategory" onchange="toggleCategoryFields(this.value)">
+          <option value="Medical Cylinder">Medical Cylinder (Combined Order)</option>
+          <option value="Spare Parts">Spare Parts</option>
+          <option value="Biomedical Tools">Biomedical Tools / Equipment</option>
+          <option value="Consumables">Consumables / Accessories</option>
+        </select>
+      </div>
+
+      <div id="cylinderTypeGroup">
+        <label>Cylinder Variety & Gas Type:</label>
+        <select id="purCylinderVariety">
+          <option value="Oxygen (O2) Cylinder">Oxygen (O2) Cylinder</option>
+          <option value="Carbon Dioxide (CO2) Cylinder">Carbon Dioxide (CO2) Cylinder</option>
+          <option value="Nitrous Oxide (N2O) Cylinder">Nitrous Oxide (N2O) Cylinder</option>
+          <option value="Medical Air (Medico) Cylinder">Medical Air (Medico) Cylinder</option>
+        </select>
+      </div>
+
+      <div id="standardItemNameGroup" class="hidden">
+        <label>Item Name / Description:</label>
+        <input type="text" id="purItemName" placeholder="e.g. SpO2 Probe / BP Cuff / Multimeter">
+      </div>
+
+      <div>
+        <label>Quantity / Nos (Pieces):</label>
+        <input type="number" id="purQty" placeholder="e.g. 10" min="1" oninput="calcPurTotal()">
+      </div>
+      <div>
+        <label>Unit Price (UGX):</label>
+        <input type="number" id="purUnitPrice" placeholder="e.g. 1000" min="0" oninput="calcPurTotal()">
+      </div>
+      <div>
+        <label>Total Amount (Auto):</label>
+        <input type="text" id="purTotalAmount" readonly style="font-weight:bold; color:#047857;">
+      </div>
+      <div>
+        <label>Payment Method:</label>
+        <select id="purPayment">
+          <option value="Cash">Cash</option>
+          <option value="Bank Transfer">Bank Transfer</option>
+          <option value="LPO">LPO</option>
+          <option value="Credit">Credit</option>
+        </select>
+      </div>
+      <div>
+        <label>Supplier / Vendor Name:</label>
+        <input type="text" id="purVendor" placeholder="e.g. Surgipharm / Gas Vendor">
+      </div>
+      <div style="display: flex; align-items: flex-end; grid-column: span 2;">
+        <button type="button" class="add-inv-btn" style="background-color:#0d9488; width:100%;" onclick="addPurchaseRecord()">➕ Add Item to Invoice</button>
+      </div>
+    </div>
+
+    <div style="display: flex; justify-content: space-between; align-items: center; margin: 10px 0; flex-wrap:wrap; gap:10px;">
+      <div style="font-weight: bold; color: #047857;" id="purchaseSummaryStats">Grand Total Expenditure: 0 UGX</div>
+      <button type="button" class="export-btn" style="background-color:#0d9488;" onclick="exportPurchasesCSV()">📥 Export Excel Report</button>
+    </div>
+
+    <div style="overflow-x: auto; flex: 1; max-height: 45vh;">
+      <table style="width: 100%; border-collapse: collapse; font-size: 12px;">
+        <thead>
+          <tr style="background:#0f172a; color:white;">
+            <th>S.No</th>
+            <th>Hospital Name</th>
+            <th>Department Name</th>
+            <th>Date</th>
+            <th>Invoice No</th>
+            <th>Category / Item Details</th>
+            <th>Quantity (Nos)</th>
+            <th>Unit Price (UGX)</th>
+            <th>Total Amount (UGX)</th>
+            <th>Payment</th>
+            <th>Vendor</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody id="purchasesTableBody">
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
 <script>
   const WEB3FORMS_ACCESS_KEY = "8fd8f731-7539-4fdc-bd24-7c0aa7cddc5d"; 
   let isBiomedAuthorized = false;
 
-  // Complete 175 Equipment Master Inventory across all 15 Departments from Excel
   const DEFAULT_INVENTORY_DATA = [
-    // 01. LABORATORY DEPARTMENT
     {dept: "01. LABORATORY DEPARTMENT", id: "LA.RM-01", name: "Roller Mixer", company: "Elektro Genesis", model: "KJMR-11", serial: "-"},
-    {dept: "01. LABORATORY DEPARTMENT", id: "LA.HPD-02", name: "Helicobacter Pylori Detector", company: "EC Headway", model: "HUBT-20P", serial: "2018120136"},
-    {dept: "01. LABORATORY DEPARTMENT", id: "LA.TWB-03", name: "Thermostatic Water Bath", company: "Faithful", model: "DK-98-11", serial: "201603211505"},
-    {dept: "01. LABORATORY DEPARTMENT", id: "LA.VDSR-04", name: "VDRL Shaker", company: "Growell Instruments", model: "GL/VS/06", serial: "G10030"},
-    {dept: "01. LABORATORY DEPARTMENT", id: "LA.CEG-05", name: "Centrifuge", company: "-", model: "-", serial: "-"},
-    {dept: "01. LABORATORY DEPARTMENT", id: "LA.SW-06", name: "Slide Warmer", company: "LW Scientific", model: "Slide Warmer/Dry Bath", serial: "50226"},
-    {dept: "01. LABORATORY DEPARTMENT", id: "LA.CA-07", name: "Chemistry Analyzer", company: "Mindray", model: "BS-240", serial: "YX-9A003128"},
-    {dept: "01. LABORATORY DEPARTMENT", id: "LA.CA-08", name: "Chemistry Analyzer", company: "Mindray", model: "BS-380", serial: "WS-52002256"},
-    {dept: "01. LABORATORY DEPARTMENT", id: "LA.MC-09", name: "Mini Cube", company: "Diesse", model: "2018-09", serial: "1700"},
-    {dept: "01. LABORATORY DEPARTMENT", id: "LA.BGCA-10", name: "Blood Gas & Chemistry Analyzer", company: "Edan", model: "I5", serial: "960360"},
-    {dept: "01. LABORATORY DEPARTMENT", id: "LA.MIS-11", name: "Microscope", company: "Labomed", model: "LX400", serial: "160691000"},
-    {dept: "01. LABORATORY DEPARTMENT", id: "LA.MIS-12", name: "Microscope", company: "Olympus", model: "CX23LEDRFS1", serial: "8M87145"},
-    {dept: "01. LABORATORY DEPARTMENT", id: "LA.RM-13", name: "Roller Mixer", company: "Stuart", model: "SRT6", serial: "R860000417"},
-    {dept: "01. LABORATORY DEPARTMENT", id: "LA.NKCA-14", name: "Na/K/Cl Analyzer", company: "EasyLyte Plus", model: "-", serial: "40644CNKC"},
-    {dept: "01. LABORATORY DEPARTMENT", id: "LA.NKCA-15", name: "Na/K/Cl Analyzer", company: "EasyLyte Plus", model: "2020-04-06", serial: "62120CNKC"},
-    {dept: "01. LABORATORY DEPARTMENT", id: "LA.HMA-16", name: "Hematology Analyzer", company: "Mindray", model: "BC-6200", serial: "TW-98000651"},
-    {dept: "01. LABORATORY DEPARTMENT", id: "LA.IMA-17", name: "Immunoassay Analyzer", company: "Snibe Diagnostic", model: "MAGLUMI 800", serial: "230200321700195"},
-    {dept: "01. LABORATORY DEPARTMENT", id: "LA.IMA-18", name: "Immunoassay Analyzer", company: "bioMérieux", model: "MIN VIDAS", serial: "IVD5214146"},
-    {dept: "01. LABORATORY DEPARTMENT", id: "LA.GED-19", name: "Gel Documentation System", company: "G Made", model: "GDS Series", serial: "-"},
-    {dept: "01. LABORATORY DEPARTMENT", id: "LA.SWG-20", name: "Pure Sine Wave Generator", company: "Luminous", model: "iCruze", serial: "-"},
-    {dept: "01. LABORATORY DEPARTMENT", id: "LA.SWG-21", name: "Pure Sine Wave Generator", company: "Luminous", model: "iCruze", serial: "-"},
-    {dept: "01. LABORATORY DEPARTMENT", id: "LA.BRE-22", name: "Blood Bank Refrigerator", company: "Growell Instruments", model: "GI/BBR/01", serial: "010031"},
-    {dept: "01. LABORATORY DEPARTMENT", id: "LA.MRE-23", name: "Medicine Refrigerator", company: "LG", model: "IntelloCool", serial: "-"},
-    {dept: "01. LABORATORY DEPARTMENT", id: "LA.MRE-24", name: "Medicine Refrigerator", company: "Kirsch", model: "FD9911", serial: "GK610698"},
-    {dept: "01. LABORATORY DEPARTMENT", id: "LA.MRE-25", name: "Bacteriological Incubator", company: "Perdtek", model: "-", serial: "-"},
-
-    // 02. RADIOLOGICAL DEPARTMENT
-    {dept: "02. RADIOLOGICAL DEPARTMENT", id: "RA.XR-01", name: "X-Ray Machine", company: "Siemens", model: "10911200", serial: "90030092"},
-    {dept: "02. RADIOLOGICAL DEPARTMENT", id: "RA.MXR-01", name: "Mobile X-Ray Machine", company: "Allengers-HF", model: "MARS-3.5APR SBM", serial: "2K15120376-BX/HF"},
-    {dept: "02. RADIOLOGICAL DEPARTMENT", id: "RA.XRP-01", name: "X-ray Printer", company: "Fujifilm Corporation", model: "DRYPIX6000", serial: "56829145"},
-    {dept: "02. RADIOLOGICAL DEPARTMENT", id: "RA.XRP-01", name: "X-Ray Cassette Reader", company: "Fujifilm Corporation", model: "CR-IR-392", serial: "56930300"},
-
-    // 03. EMERGENCY DEPARTMENT
-    {dept: "03. EMERGENCY DEPARTMENT", id: "EM.PMO-01", name: "Patient Monitor", company: "Schiller", model: "TRUSCOPE IIIS", serial: "R18D277"},
-    {dept: "03. EMERGENCY DEPARTMENT", id: "EM.PMO-02", name: "Patient Monitor", company: "Schiller", model: "TRUSCOPE IIIS", serial: "R18D279"},
-    {dept: "03. EMERGENCY DEPARTMENT", id: "EM.ECG-01", name: "ECG Machine", company: "GE HealthCare", model: "MAC600", serial: "SS519390021PA"},
-    {dept: "03. EMERGENCY DEPARTMENT", id: "EM.DE-01", name: "Defibrillator", company: "Schiller", model: "CARDIOPLUS", serial: "A-11D147"},
-    {dept: "03. EMERGENCY DEPARTMENT", id: "EM.SM-01", name: "Suction Machine", company: "Yuwell", model: "7A-23D", serial: "KO2019110198"},
-    {dept: "03. EMERGENCY DEPARTMENT", id: "-", name: "Patient Bed", company: "-", model: "-", serial: "-"},
-    {dept: "03. EMERGENCY DEPARTMENT", id: "-", name: "Weight Scale", company: "-", model: "-", serial: "-"},
-
-    // 04. SCANNING DEPARTMENT
-    {dept: "04. SCANNING DEPARTMENT", id: "SC.UL-01", name: "Ultrasound Machine", company: "Siemens", model: "KT-LM200 HDPE", serial: "1631 B03"},
-    {dept: "04. SCANNING DEPARTMENT", id: "SC.UL-02", name: "Ultrasound Machine", company: "Siemens", model: "11335791", serial: "553474"},
-
-    // 05. ANTENATAL TRIAGE DEPARTMENT
-    {dept: "05. ANTENATAL TRIAGE DEPARTMENT", id: "AT.PMO-01", name: "Patient Monitor", company: "Schiller", model: "TRUSCOPE IIIS", serial: "R19C376"},
-    {dept: "05. ANTENATAL TRIAGE DEPARTMENT", id: "-", name: "Weight Scale", company: "-", model: "-", serial: "-"},
-
-    // 06. ICU DEPARTMENT
     {dept: "06. ICU DEPARTMENT", id: "ICU.PMO-01", name: "Patient Monitor", company: "Schiller", model: "TRUSCOPE IIIS", serial: "R180276"},
-    {dept: "06. ICU DEPARTMENT", id: "ICU.PMO-02", name: "Patient Monitor", company: "Schiller", model: "TRUSCOPE IIIS", serial: "R18D278"},
-    {dept: "06. ICU DEPARTMENT", id: "ICU.PMO-03", name: "Patient Monitor", company: "Schiller", model: "TRUSCOPE IIIS", serial: "R19C377"},
-    {dept: "06. ICU DEPARTMENT", id: "ICU.VR-01", name: "Ventilator", company: "GE HealthCare", model: "CARESCAPE R860", serial: "CBRV02242"},
-    {dept: "06. ICU DEPARTMENT", id: "ICU.VR-02", name: "Ventilator", company: "GE HealthCare", model: "CARESCAPE R860", serial: "GE020059"},
-    {dept: "06. ICU DEPARTMENT", id: "ICU.VR-03", name: "Ventilator", company: "GE HealthCare", model: "CARESCAPE R860", serial: "CBRW02316"},
-    {dept: "06. ICU DEPARTMENT", id: "ICU.VR-04", name: "Ventilator", company: "GE HealthCare", model: "CARESCAPE R860", serial: "CBR740928"},
-    {dept: "06. ICU DEPARTMENT", id: "ICU.SM-01", name: "Suction Machine", company: "Yuwell", model: "7A-23D", serial: "K02018010024"},
-    {dept: "06. ICU DEPARTMENT", id: "ICU.SM-02", name: "Suction Machine", company: "Yuwell", model: "7A-23D", serial: "K02018010030"},
-    {dept: "06. ICU DEPARTMENT", id: "ICU.IP-01", name: "Infusion Pump", company: "B. Braun", model: "INFUSOMAT P", serial: "8712212"},
-    {dept: "06. ICU DEPARTMENT", id: "ICU.DF-01", name: "Defibrillator", company: "BPL", model: "DF2617-AED", serial: "EDMK8C1463"},
-    {dept: "06. ICU DEPARTMENT", id: "ICU.SYP-01", name: "Syringe Pump", company: "FRESENIUS KABI", model: "INJECTOMAT AGILIA", serial: "23641842"},
-    {dept: "06. ICU DEPARTMENT", id: "ICU.SYP-02", name: "Syringe Pump", company: "FRESENIUS KABI", model: "INJECTOMAT AGILIA", serial: "23642443"},
-    {dept: "06. ICU DEPARTMENT", id: "ICU.SYP-03", name: "Syringe Pump", company: "BD Alaris", model: "ALARIS", serial: "370031850"},
-    {dept: "06. ICU DEPARTMENT", id: "ICU.SYP-04", name: "Syringe Pump", company: "BD Alaris", model: "ALARIS", serial: "372028854"},
-
-    // 07. INPATIENT DEPARTMENT
-    {dept: "07. INPATIENT DEPARTMENT", id: "IP.PMO-01", name: "Patient Monitor", company: "CONTEC", model: "CMS7000", serial: "20120600096"},
-    {dept: "07. INPATIENT DEPARTMENT", id: "IP.PMO-02", name: "Patient Monitor", company: "Schiller", model: "TRUSCOPE IIIS", serial: "R21B2932"},
-    {dept: "07. INPATIENT DEPARTMENT", id: "IP.RF-01", name: "Refrigerator", company: "Biomedical System", model: "63326", serial: "5295498"},
-    {dept: "07. INPATIENT DEPARTMENT", id: "-", name: "Patient Bed", company: "-", model: "-", serial: "-"},
-
-    // 08. NICU DEPARTMENT
-    {dept: "08. NICU DEPARTMENT", id: "NICU.INPMO-01", name: "Infant Patient Monitor", company: "Maestros Mediline System Ltd.", model: "LOTUS-500", serial: "-"},
-    {dept: "08. NICU DEPARTMENT", id: "NICU.CP-01", name: "CPAP", company: "Phoenix Medical System", model: "SVAAC", serial: "1135"},
-    {dept: "08. NICU DEPARTMENT", id: "NICU.PT-01", name: "Phototherapy", company: "Phoenix Medical System", model: "BRILLIANCE", serial: "3626"},
-    {dept: "08. NICU DEPARTMENT", id: "NICU.INB-01", name: "Incubator", company: "Phoenix Medical System", model: "INC-200", serial: "2360"},
-    {dept: "08. NICU DEPARTMENT", id: "NICU.RW-01", name: "Infant Radiant Warmer", company: "Phoenix Medical System", model: "NES101", serial: "6060"},
-    {dept: "08. NICU DEPARTMENT", id: "-", name: "Infant Manual CPAP", company: "-", model: "-", serial: "-"},
-    {dept: "08. NICU DEPARTMENT", id: "-", name: "Phototherapy Bed", company: "-", model: "-", serial: "-"},
-    {dept: "08. NICU DEPARTMENT", id: "-", name: "Baby Carriage", company: "-", model: "-", serial: "-"},
-
-    // 09. MATERNITY WARD
-    {dept: "09. MATERNITY WARD", id: "MA.PMO-01", name: "Patient Monitor", company: "Schiller", model: "TRUSCOPE IIIS", serial: "M003E013164"},
-    {dept: "09. MATERNITY WARD", id: "MA.RW-01", name: "Radiant Warmer", company: "Phoenix Medical System", model: "NWS102", serial: "2130"},
-    {dept: "09. MATERNITY WARD", id: "MA.SLP-01", name: "Maternity Surgical Lamp", company: "ASCO", model: "-", serial: "-"},
-    {dept: "09. MATERNITY WARD", id: "MA.DB.01", name: "Delivery Bed", company: "Nitrocare", model: "JMM-02", serial: "JMMM020117"},
-    {dept: "09. MATERNITY WARD", id: "MA.DB.02", name: "Delivery Bed", company: "Nitrocare", model: "JMM-02", serial: "JMMM020116"},
-    {dept: "09. MATERNITY WARD", id: "MA.BWS-01", name: "Baby Weight Scale", company: "Welcome Instruments", model: "CLASS III", serial: "11816"},
-    {dept: "09. MATERNITY WARD", id: "-", name: "Standard Bed", company: "-", model: "-", serial: "-"},
-    {dept: "09. MATERNITY WARD", id: "-", name: "Ward Screen", company: "-", model: "-", serial: "-"},
-
-    // 10. DIALYSIS DEPARTMENT
-    {dept: "10. DIALYSIS DEPARTMENT", id: "DIA.MAC-01", name: "Dialysis Machine", company: "FRESENIUS", model: "4008 S (NG)", serial: "6SXAKK65"},
-    {dept: "10. DIALYSIS DEPARTMENT", id: "DIA.MAC-02", name: "Dialysis Machine", company: "FRESENIUS", model: "4008 S (NG)", serial: "8SXA0JL0"},
-    {dept: "10. DIALYSIS DEPARTMENT", id: "DIA.MAC-03", name: "Dialysis Machine", company: "FRESENIUS", model: "4008 S (NG)", serial: "6SXAPH58"},
-    {dept: "10. DIALYSIS DEPARTMENT", id: "DIA.MAC-04", name: "Dialysis Machine", company: "FRESENIUS", model: "4008 S (NG)", serial: "6SXAKV68"},
-    {dept: "10. DIALYSIS DEPARTMENT", id: "DIA.MAC-05", name: "Dialysis Machine", company: "FRESENIUS", model: "4008 S (NG)", serial: "6SXAKW82"},
-    {dept: "10. DIALYSIS DEPARTMENT", id: "DIA.MAC-06", name: "Dialysis Machine", company: "FRESENIUS", model: "4008 S (NG)", serial: "-"},
-    {dept: "10. DIALYSIS DEPARTMENT", id: "DIA.PMO-01", name: "Patient Monitor", company: "Schiller", model: "TRUSCOPE IIIS", serial: "-"},
-    {dept: "10. DIALYSIS DEPARTMENT", id: "DIA.PMO-02", name: "Patient Monitor", company: "Schiller", model: "TRUSCOPE II", serial: "M003E016629"},
-    {dept: "10. DIALYSIS DEPARTMENT", id: "DIA.PMO-03", name: "Patient Monitor", company: "Schiller", model: "TRUSCOPE IIIS", serial: "-"},
-
-    // 11. PHYSIOTHERAPY DEPARTMENT
-    {dept: "11. PHYSIOTHERAPY DEPARTMENT", id: "PHY.TR-01", name: "Traction Bed", company: "HMS MEDICAL SYSTEM", model: "INDOTRC-D", serial: "1381300320"},
-    {dept: "11. PHYSIOTHERAPY DEPARTMENT", id: "PHY.TE-01", name: "TENS", company: "HMS MEDICAL SYSTEM", model: "INDOTENS 4CH", serial: "14821410726"},
-    {dept: "11. PHYSIOTHERAPY DEPARTMENT", id: "PHY.TE-02", name: "TENS", company: "HMS MEDICAL SYSTEM", model: "INDOTENS 4CH", serial: "1488660923"},
-    {dept: "11. PHYSIOTHERAPY DEPARTMENT", id: "PHY.TE-03", name: "TENS", company: "AVIS-3202", model: "INDOTENS 4CH", serial: "0220191427"},
-    {dept: "11. PHYSIOTHERAPY DEPARTMENT", id: "PHY.DT-01", name: "Shortwave Diathermy", company: "HMS MEDICAL SYSTEM", model: "-", serial: "-"},
-    {dept: "11. PHYSIOTHERAPY DEPARTMENT", id: "PHY.CY-01", name: "Cryogenic Machine", company: "CRYOFOS", model: "-", serial: "-"},
-
-    // 12. OPERATION THEATRE (OT) DEPARTMENT
     {dept: "12. OPERATION THEATRE (OT) DEPARTMENT", id: "OT.PMO-01", name: "Patient Monitor", company: "Schiller", model: "TRUSCOPE IIIS", serial: "R18D280"},
-    {dept: "12. OPERATION THEATRE (OT) DEPARTMENT", id: "OT.PMO-02", name: "Patient Monitor", company: "Schiller", model: "TRUSCOPE ULTRA Q5", serial: "Q068E065875"},
-    {dept: "12. OPERATION THEATRE (OT) DEPARTMENT", id: "OT.PMO-03", name: "Patient Monitor", company: "Schiller", model: "TRUSCOPE ULTRA Q5", serial: "Q068E065874"},
-    {dept: "12. OPERATION THEATRE (OT) DEPARTMENT", id: "OT.RW-01", name: "Infant Radiant Warmer", company: "Phoenix Medical System", model: "NES101", serial: "6061"},
-    {dept: "12. OPERATION THEATRE (OT) DEPARTMENT", id: "OT.SM-01", name: "Suction Machine", company: "KMS", model: "RF-20", serial: "S20210509224"},
-    {dept: "12. OPERATION THEATRE (OT) DEPARTMENT", id: "OT.SM-02", name: "Suction Machine", company: "Yuwell", model: "7A-23D", serial: "KO2018010015"},
-    {dept: "12. OPERATION THEATRE (OT) DEPARTMENT", id: "OT.DT-01", name: "Diathermy Machine", company: "Alan Electronic Systems Pvt. Ltd.", model: "ELSY-360L+", serial: "ASG-L1801612"},
-    {dept: "12. OPERATION THEATRE (OT) DEPARTMENT", id: "OT.DT-02", name: "Diathermy Machine", company: "Alan Electronic Systems Pvt. Ltd.", model: "ELSY-360 series", serial: "EDS-ELXX-00001"},
-    {dept: "12. OPERATION THEATRE (OT) DEPARTMENT", id: "OT.DT-03", name: "Diathermy Machine", company: "Alan Electronic Systems Pvt. Ltd.", model: "COMBI-MAX-MBAVP", serial: "ECS-CAVP-000007"},
-    {dept: "12. OPERATION THEATRE (OT) DEPARTMENT", id: "OT.LT-01", name: "Lithotripsy Machine", company: "Medispec", model: "NOVEMBER-2013", serial: "1113048"},
-    {dept: "12. OPERATION THEATRE (OT) DEPARTMENT", id: "OT.LT-02", name: "Lithotripsy Machine", company: "Pulselith by Advanced Health Care", model: "PULSE001", serial: "20250113"},
-    {dept: "12. OPERATION THEATRE (OT) DEPARTMENT", id: "OT.ANM-01", name: "Anesthesia Machine", company: "GE HealthCare", model: "DATEX-OHMEDA 904E", serial: "MA1201003"},
-    {dept: "12. OPERATION THEATRE (OT) DEPARTMENT", id: "OT.ANM-02", name: "Anesthesia Machine", company: "GE HealthCare", model: "DATEX-OHMEDA 9100C", serial: "ME16115526"},
-    {dept: "12. OPERATION THEATRE (OT) DEPARTMENT", id: "OT.LT-01", name: "Surgical Light (Lamp)", company: "ASCO", model: "CSL7-2011", serial: "88544"},
-    {dept: "12. OPERATION THEATRE (OT) DEPARTMENT", id: "OT.LT-02", name: "Surgical Light (Lamp)", company: "ASCO", model: "CSL7-2011", serial: "88544"},
-    {dept: "12. OPERATION THEATRE (OT) DEPARTMENT", id: "OT.EM-01", name: "Endoscopic Monitor", company: "Karl Storz", model: "9619NB / KS-19", serial: "51404056 SV026"},
-    {dept: "12. OPERATION THEATRE (OT) DEPARTMENT", id: "OT.EV-01", name: "Video Processor", company: "Olympus", model: "2023-03-08", serial: "7342552"},
-    {dept: "12. OPERATION THEATRE (OT) DEPARTMENT", id: "OT.EL-01", name: "Light Source", company: "Karl Storz", model: "PV2606", serial: "-"},
-    {dept: "12. OPERATION THEATRE (OT) DEPARTMENT", id: "OT.EL-01", name: "Endo Light", company: "Karl Storz", model: "HD ENDOLIGHT 333R", serial: "-"},
-    {dept: "12. OPERATION THEATRE (OT) DEPARTMENT", id: "OT.ECCU-01", name: "4HD Camera Control Unit", company: "Karl Storz", model: "VL915033-P", serial: "-"},
-    {dept: "12. OPERATION THEATRE (OT) DEPARTMENT", id: "OT.ESM-01", name: "Suction Machine (Endoscopic)", company: "Karl Storz", model: "UNIMAT 30", serial: "25320020"},
-    {dept: "12. OPERATION THEATRE (OT) DEPARTMENT", id: "OT.LM-01", name: "Laparoscopic Monitor", company: "Stryker", model: "2025-12", serial: "VPD265L0344"},
-    {dept: "12. OPERATION THEATRE (OT) DEPARTMENT", id: "OT.LCCU-01", name: "Camera Controller Unit", company: "Stryker", "model": "1188-010-000", "serial": "15G018564"},
-    {dept: "12. OPERATION THEATRE (OT) DEPARTMENT", id: "OT.LLS-01", name: "Light Source", company: "OM Surgical", model: "LIGHT SOURCE (LED L-180)", serial: "72600405"},
-    {dept: "12. OPERATION THEATRE (OT) DEPARTMENT", id: "OT.LIS-01", name: "CO2 Insufflator", company: "OM Surgical", model: "ALPHALATOR-40", serial: "79170853/OMS"},
-    {dept: "12. OPERATION THEATRE (OT) DEPARTMENT", id: "OT.BD-01", name: "Operating Table", company: "Medispec Ltd.", model: "09/2013", serial: "88544"},
-    {dept: "12. OPERATION THEATRE (OT) DEPARTMENT", id: "OT.BD-02", name: "Operating Table", company: "-", model: "MULTISTAP 4S", serial: "-"},
-    {dept: "12. OPERATION THEATRE (OT) DEPARTMENT", id: "OT.LSM-01", name: "Liposuction Machine", company: "APEX INDIA", model: "-", serial: "-"},
-    {dept: "12. OPERATION THEATRE (OT) DEPARTMENT", id: "OT.AUCL-01", name: "Autoclave", company: "Advin Healthcare", model: "-", serial: "-"},
-    {dept: "12. OPERATION THEATRE (OT) DEPARTMENT", id: "OT.AUCL-02", name: "Autoclave", company: "Biotecnic India", model: "-", serial: "-"},
-    {dept: "12. OPERATION THEATRE (OT) DEPARTMENT", id: "OT.AUCL-03", name: "Autoclave", company: "-", model: "-", serial: "-"},
-    {dept: "12. OPERATION THEATRE (OT) DEPARTMENT", id: "OT.HYSM-01", name: "Hysteroscopic Machine", company: "Kraft Surgical Pvt. Ltd.", model: "TYPE-I BE", serial: "20253304"},
-    {dept: "12. OPERATION THEATRE (OT) DEPARTMENT", id: "OT.ARXP-01", name: "Arthroscopic Machine", company: "ConMed Corporation", model: "E9000G", serial: "20150081"},
-    {dept: "12. OPERATION THEATRE (OT) DEPARTMENT", id: "OT.DTOM-01", name: "Digital Tourniquet Machine", company: "Doctrold India", model: "TOURNIQUET 210", serial: "DIT 21010"},
-    {dept: "12. OPERATION THEATRE (OT) DEPARTMENT", id: "OT.CARM-01", name: "C-Arm Machine", company: "Siemens", model: "08630506", serial: "30147"},
-    {dept: "12. OPERATION THEATRE (OT) DEPARTMENT", id: "OT.DFM-01", name: "Defibrillator Machine", company: "PHILIPS", model: "M4735A", serial: "VS00128158"},
-    {dept: "12. OPERATION THEATRE (OT) DEPARTMENT", id: "OT.HM-01", name: "Harmonic Machine", company: "Ethicon Endo-Surgery", model: "GEN11", serial: "1111222566"},
-    {dept: "12. OPERATION THEATRE (OT) DEPARTMENT", id: "OT.NZ-01", name: "Nebulizer", company: "S.Cure", model: "NEC 240", serial: "2018-11-3726"},
-    {dept: "12. OPERATION THEATRE (OT) DEPARTMENT", id: "OT.LAZ-01", name: "Laser Machine", company: "Stryker", model: "180980", serial: "11126"},
-    {dept: "12. OPERATION THEATRE (OT) DEPARTMENT", id: "OT.ETU-01", name: "Endoscopic Tube", company: "Olympus", model: "-", serial: "-"},
-    {dept: "12. OPERATION THEATRE (OT) DEPARTMENT", id: "OT.ETU-02", name: "Colonoscopic Tube", company: "Olympus", model: "-", serial: "-"},
-    {dept: "12. OPERATION THEATRE (OT) DEPARTMENT", id: "-", name: "Weight Scale", company: "-", model: "-", serial: "-"},
-    {dept: "12. OPERATION THEATRE (OT) DEPARTMENT", id: "-", name: "X-ray Viewer", company: "-", model: "-", serial: "-"},
-    {dept: "12. OPERATION THEATRE (OT) DEPARTMENT", id: "-", name: "Recovery Bed", company: "-", model: "-", serial: "-"},
-
-    // 13. DAY CARE DEPARTMENT
-    {dept: "13. DAY CARE DEPARTMENT", id: "DAC.PMO-01", name: "Patient Monitor", company: "Schiller", model: "TRUSCOPE III", serial: "R21B2933"},
-
-    // 14. MANIFOLD ROOM
-    {dept: "14. MANIFOLD ROOM", id: "MAN-CYL-S01", name: "Small Cylinder - O2 (Oxygen)", company: "Manifold System", model: "Small Cylinder", serial: "-"},
-    {dept: "14. MANIFOLD ROOM", id: "MAN-CYL-S02", name: "Small Cylinder - CO2 (Carbon Dioxide)", company: "Manifold System", model: "Small Cylinder", serial: "-"},
-    {dept: "14. MANIFOLD ROOM", id: "MAN-CYL-L01", name: "Large Cylinder - O2 (Oxygen)", company: "Manifold System", model: "Large Cylinder", serial: "-"},
-    {dept: "14. MANIFOLD ROOM", id: "MAN-CYL-L02", name: "Large Cylinder - CO2 (Carbon Dioxide)", company: "Manifold System", model: "Large Cylinder", serial: "-"},
-    {dept: "14. MANIFOLD ROOM", id: "MAN-CYL-L03", name: "Large Cylinder - N2O (Nitrous Oxide)", company: "Manifold System", model: "Large Cylinder", serial: "-"},
-    {dept: "14. MANIFOLD ROOM", id: "MAN-CYL-L04", name: "Large Cylinder - Medico (Medical Air/Gas)", company: "Manifold System", model: "Large Cylinder", serial: "-"},
-
-    // 15. BIOMEDICAL WORKSHOP
-    {dept: "15. BIOMEDICAL WORKSHOP", id: "-", name: "Patient Monitor", company: "GE HealthCare", model: "B40", serial: "SG212491415"},
-    {dept: "15. BIOMEDICAL WORKSHOP", id: "-", name: "Patient Monitor", company: "Schiller", model: "TRUSCOPE II", serial: "M003E017054"},
-    {dept: "15. BIOMEDICAL WORKSHOP", id: "-", name: "Patient Monitor", company: "Schiller", model: "TRUSCOPE II", serial: "M003E013162"},
-    {dept: "15. BIOMEDICAL WORKSHOP", id: "-", name: "Syringe Pump", company: "BD Alaris", model: "GUARDRAILS BD", serial: "372048851"},
-    {dept: "15. BIOMEDICAL WORKSHOP", id: "-", name: "Syringe Pump", company: "Fresenius Kabi", model: "18090", serial: "23614373"},
-    {dept: "15. BIOMEDICAL WORKSHOP", id: "-", name: "Syringe Pump", company: "Maestros", model: "MIP-100", serial: "1612124-161"},
-    {dept: "15. BIOMEDICAL WORKSHOP", id: "-", name: "Syringe Pump", company: "B. Braun", model: "8714827", serial: "133186"},
-    {dept: "15. BIOMEDICAL WORKSHOP", id: "-", name: "Treadmill Machine", company: "Healthcare & Fitness", model: "-", serial: "-"},
-    {dept: "15. BIOMEDICAL WORKSHOP", id: "-", name: "Refrigerator", company: "Mikachi", model: "-", serial: "-"},
-    {dept: "15. BIOMEDICAL WORKSHOP", id: "-", name: "Nebulizer", company: "Beurer", model: "2020", serial: "F34/052193"},
-    {dept: "15. BIOMEDICAL WORKSHOP", id: "-", name: "Nebulizer", company: "Beurer", model: "1H-21", serial: "F34/050981"},
-    {dept: "15. BIOMEDICAL WORKSHOP", id: "-", name: "Centrifuge Machine", company: "Omega 06", model: "-", serial: "60318101"},
-    {dept: "15. BIOMEDICAL WORKSHOP", id: "-", name: "Centrifuge Machine", company: "Elektro", model: "80-2", serial: "201804"},
-    {dept: "15. BIOMEDICAL WORKSHOP", id: "-", name: "Automated Hematology Analyzer", company: "MINDRAY", model: "BC-5380", serial: "RF05100639"},
-    {dept: "15. BIOMEDICAL WORKSHOP", id: "-", name: "CPAP Machine", company: "Phoenix Medical System", model: "nCPAP 300", serial: "3669"},
-    {dept: "15. BIOMEDICAL WORKSHOP", id: "-", name: "CPAP Machine", company: "Phoenix Medical System", model: "nCPAP 300", serial: "1354"},
-    {dept: "15. BIOMEDICAL WORKSHOP", id: "-", name: "Incubator", company: "Phoenix Medical System", model: "INC200", serial: "1040"},
-    {dept: "15. BIOMEDICAL WORKSHOP", id: "-", name: "Endoscope", company: "Karl Storz", model: "SPIES", serial: "22203020-114"},
-    {dept: "15. BIOMEDICAL WORKSHOP", id: "-", name: "UPS", company: "Su-Kam", model: "3KV/180V", serial: "FADOUSIQW"},
-    {dept: "15. BIOMEDICAL WORKSHOP", id: "-", name: "Infusion Pump", company: "B. Braun", model: "INFUSOMAT P", serial: "41682"},
-    {dept: "15. BIOMEDICAL WORKSHOP", id: "-", name: "Infusion Pump", company: "B. Braun", model: "INFUSOMAT P", serial: "49938"},
-    {dept: "15. BIOMEDICAL WORKSHOP", id: "-", name: "TENS Machine", company: "MAJO TENS 4CH", model: "-", serial: "-"},
-    {dept: "15. BIOMEDICAL WORKSHOP", id: "-", name: "Battery (Large)", company: "VBL Solar Battery", model: "-", serial: "-"},
-    {dept: "15. BIOMEDICAL WORKSHOP", id: "-", name: "Battery (Large)", company: "VBL Solar Battery", model: "-", serial: "-"},
-    {dept: "15. BIOMEDICAL WORKSHOP", id: "-", name: "Battery (Small)", company: "Luminous", model: "12V 7Ah", serial: "-"},
-    {dept: "15. BIOMEDICAL WORKSHOP", id: "-", name: "Battery (Small)", company: "Fortuner", model: "13.8V 2Ah", serial: "-"},
-    {dept: "15. BIOMEDICAL WORKSHOP", id: "-", name: "Battery (Small)", company: "Lightwave", model: "12V 9Ah", serial: "-"},
-    {dept: "15. BIOMEDICAL WORKSHOP", id: "-", name: "Printer", company: "HP", model: "LASER JET PRO M1029", serial: "VNC3T94082"},
-    {dept: "15. BIOMEDICAL WORKSHOP", id: "-", name: "Ladder", company: "-", model: "-", serial: "-"},
-    {dept: "15. BIOMEDICAL WORKSHOP", id: "-", name: "Ceiling Fan", company: "-", model: "-", serial: "-"},
-    {dept: "15. BIOMEDICAL WORKSHOP", id: "-", name: "Humidifier", company: "-", model: "-", serial: "-"},
-    {dept: "15. BIOMEDICAL WORKSHOP", id: "-", name: "Table Fan (Large)", company: "-", model: "-", serial: "-"},
-    {dept: "15. BIOMEDICAL WORKSHOP", id: "-", name: "Ultrasound Machine", company: "PHILIPS", model: "MCMD02AA", serial: "M2540-66500"},
-    {dept: "15. BIOMEDICAL WORKSHOP", id: "-", name: "IV Stand", company: "-", model: "-", serial: "-"}
+    {dept: "14. MANIFOLD ROOM", id: "MAN-CYL-S01", name: "Small Cylinder - O2 (Oxygen)", company: "Manifold System", model: "Small Cylinder", serial: "-"}
   ];
 
   function getMasterInventory() {
@@ -595,6 +615,41 @@
 
   function saveMasterInventory(data) {
     localStorage.setItem("norvik_master_inventory", JSON.stringify(data));
+  }
+
+  function getPurchasesData() {
+    let saved = localStorage.getItem("norvik_biomed_purchases");
+    return saved ? JSON.parse(saved) : [];
+  }
+
+  function savePurchasesData(data) {
+    localStorage.setItem("norvik_biomed_purchases", JSON.stringify(data));
+  }
+
+  function populateDatalists() {
+    let inventory = getMasterInventory();
+    let machineFormList = document.getElementById("machineSuggestionsList");
+    let historyList = document.getElementById("historyOptionsDatalist");
+
+    let uniqueSet = new Set();
+    inventory.forEach(item => {
+      if(item.name && item.name !== "-") uniqueSet.add(item.name);
+      if(item.model && item.model !== "-") uniqueSet.add(item.model);
+      if(item.serial && item.serial !== "-") uniqueSet.add(item.serial);
+    });
+
+    let complaints = JSON.parse(localStorage.getItem("biomedical_records") || "[]");
+    complaints.forEach(c => {
+      if(c.machine) uniqueSet.add(c.machine);
+    });
+
+    let htmlOptions = "";
+    uniqueSet.forEach(val => {
+      htmlOptions += `<option value="${val}">`;
+    });
+
+    if(machineFormList) machineFormList.innerHTML = htmlOptions;
+    if(historyList) historyList.innerHTML = htmlOptions;
   }
 
   document.addEventListener("DOMContentLoaded", function() {
@@ -611,12 +666,16 @@
       btn.style.backgroundColor = "#10b981";
     }
 
+    document.getElementById("purDate").value = new Date().toISOString().split('T')[0];
+    toggleCategoryFields(document.getElementById("purCategory").value);
+    populateDatalists();
     loadComplaints();
+    renderPurchasesTable();
   });
 
   function toggleBiomedEditMode() {
     if(!isBiomedAuthorized) {
-      let pwd = prompt("Enter Biomedical Password to enable editing (Norvik1234):");
+      let pwd = prompt("Enter Password:");
       if(pwd === "Norvik1234") {
         isBiomedAuthorized = true;
         sessionStorage.setItem("biomed_auth", "true");
@@ -733,6 +792,7 @@
     document.getElementById("complaintForm").reset();
     document.getElementById("customDeptGroup").classList.add("hidden");
     updateClock();
+    populateDatalists();
     loadComplaints();
   });
 
@@ -836,9 +896,213 @@
     }
   }
 
+  // Purchases & Grouped Invoices Password Protected Function
+  function openPurchasesModal() {
+    let pwd = prompt("Enter Password for Purchases & Invoices:");
+    if (pwd !== "Biomedical1234") {
+      alert("Incorrect Password! Access Denied.");
+      return;
+    }
+    document.getElementById("purchasesModal").style.display = "block";
+    renderPurchasesTable();
+  }
+
+  function closePurchasesModal() {
+    document.getElementById("purchasesModal").style.display = "none";
+  }
+
+  function toggleCategoryFields(category) {
+    const cylGroup = document.getElementById("cylinderTypeGroup");
+    const stdGroup = document.getElementById("standardItemNameGroup");
+    if (category === "Medical Cylinder") {
+      cylGroup.classList.remove("hidden");
+      stdGroup.classList.add("hidden");
+    } else {
+      cylGroup.classList.add("hidden");
+      stdGroup.classList.remove("hidden");
+    }
+  }
+
+  function calcPurTotal() {
+    let qty = parseFloat(document.getElementById("purQty").value) || 0;
+    let unitPrice = parseFloat(document.getElementById("purUnitPrice").value) || 0;
+    let total = qty * unitPrice;
+    document.getElementById("purTotalAmount").value = total.toLocaleString() + " UGX";
+  }
+
+  function addPurchaseRecord() {
+    let hospital = document.getElementById("purHospital").value;
+    let dept = document.getElementById("purDept").value;
+    let date = document.getElementById("purDate").value;
+    let invoiceNo = document.getElementById("purInvoiceNo").value.trim();
+    let category = document.getElementById("purCategory").value;
+    
+    let itemName = "";
+    if (category === "Medical Cylinder") {
+      itemName = document.getElementById("purCylinderVariety").value;
+    } else {
+      itemName = document.getElementById("purItemName").value.trim();
+    }
+
+    let qty = parseFloat(document.getElementById("purQty").value) || 0;
+    let unitPrice = parseFloat(document.getElementById("purUnitPrice").value) || 0;
+    let payment = document.getElementById("purPayment").value;
+    let vendor = document.getElementById("purVendor").value.trim() || "-";
+
+    if (!date || !invoiceNo || !itemName || qty <= 0 || unitPrice < 0) {
+      alert("Please fill in Invoice Number and all required details correctly!");
+      return;
+    }
+
+    let totalAmount = qty * unitPrice;
+
+    let purchases = getPurchasesData();
+    purchases.push({
+      hospital, dept, date, invoiceNo, category, itemName, qty, unitPrice, totalAmount, payment, vendor
+    });
+    savePurchasesData(purchases);
+
+    document.getElementById("purItemName").value = "";
+    document.getElementById("purQty").value = "";
+    document.getElementById("purUnitPrice").value = "";
+    document.getElementById("purTotalAmount").value = "";
+    document.getElementById("purVendor").value = "";
+
+    alert("✅ Item added to Invoice successfully!");
+    renderPurchasesTable();
+  }
+
+  function renderPurchasesTable() {
+    let purchases = getPurchasesData();
+    let tbody = document.getElementById("purchasesTableBody");
+    let summaryStats = document.getElementById("purchaseSummaryStats");
+
+    tbody.innerHTML = "";
+    let grandTotal = 0;
+
+    if (purchases.length === 0) {
+      tbody.innerHTML = `<tr><td colspan="12" style="text-align:center; padding:15px; opacity:0.7;">No purchase records found yet.</td></tr>`;
+      summaryStats.innerText = "Grand Total Expenditure: 0 UGX";
+      return;
+    }
+
+    let groups = {};
+    purchases.forEach((item, originalIndex) => {
+      let inv = item.invoiceNo;
+      if (!groups[inv]) groups[inv] = [];
+      groups[inv].push({ ...item, originalIndex });
+    });
+
+    let displaySerialNo = 1;
+
+    for (let invNo in groups) {
+      let itemsInInvoice = groups[invNo];
+      let invoiceSubtotal = 0;
+
+      itemsInInvoice.forEach((item, itemIdx) => {
+        invoiceSubtotal += Number(item.totalAmount) || 0;
+        grandTotal += Number(item.totalAmount) || 0;
+
+        let tr = document.createElement("tr");
+
+        let serialCol = (itemIdx === 0) ? `<b>${displaySerialNo}</b>` : ``;
+        let invoiceCol = (itemIdx === 0) ? `<b>${invNo}</b>` : `<span style="opacity:0.3; font-style:italic;">(cont.)</span>`;
+
+        if (itemIdx === 0) displaySerialNo++;
+
+        tr.innerHTML = `
+          <td>${serialCol}</td>
+          <td><b>${item.hospital}</b></td>
+          <td><b>${item.dept}</b></td>
+          <td>${item.date}</td>
+          <td>${invoiceCol}</td>
+          <td><b>[${item.category}]</b> ${item.itemName}</td>
+          <td>${item.qty} Nos</td>
+          <td>${item.unitPrice.toLocaleString()} UGX</td>
+          <td><b>${item.totalAmount.toLocaleString()} UGX</b></td>
+          <td>${item.payment}</td>
+          <td>${item.vendor}</td>
+          <td><button style="background:#ef4444; color:white; border:none; padding:4px 8px; border-radius:4px; cursor:pointer;" onclick="deletePurchaseRecord(${item.originalIndex})">🗑️ Delete</button></td>
+        `;
+        tbody.appendChild(tr);
+      });
+
+      let subRow = document.createElement("tr");
+      subRow.className = "invoice-subtotal-row";
+      subRow.innerHTML = `
+        <td colspan="8" style="text-align: right;">🏷️ Invoice Total (${invNo}):</td>
+        <td colspan="4"><b>${invoiceSubtotal.toLocaleString()} UGX</b></td>
+      `;
+      tbody.appendChild(subRow);
+    }
+
+    summaryStats.innerText = `Grand Total Expenditure (All Invoices): ${grandTotal.toLocaleString()} UGX`;
+  }
+
+  function deletePurchaseRecord(index) {
+    if (confirm("Are you sure you want to delete this item?")) {
+      let purchases = getPurchasesData();
+      purchases.splice(index, 1);
+      savePurchasesData(purchases);
+      renderPurchasesTable();
+    }
+  }
+
+  function exportPurchasesCSV() {
+    let purchases = getPurchasesData();
+    if(purchases.length === 0) {
+      alert("No data available to export!");
+      return;
+    }
+
+    let csvContent = "data:text/csv;charset=utf-8,S.No,Hospital Name,Department Name,Date,Invoice No,Category / Details,Quantity (Nos),Unit Price (UGX),Total Amount (UGX),Payment Method,Vendor\n";
+    let groups = {};
+    purchases.forEach(item => {
+      let inv = item.invoiceNo;
+      if (!groups[inv]) groups[inv] = [];
+      groups[inv].push(item);
+    });
+
+    let sNo = 1;
+    for (let invNo in groups) {
+      let items = groups[invNo];
+      let invTotal = 0;
+      items.forEach((row, idx) => {
+        invTotal += Number(row.totalAmount);
+        let sCol = (idx === 0) ? sNo : "";
+        let iCol = (idx === 0) ? invNo : "";
+        if (idx === 0) sNo++;
+
+        csvContent += [
+          sCol,
+          `"${row.hospital}"`,
+          `"${row.dept}"`,
+          row.date,
+          `"${iCol}"`,
+          `"[${row.category}] ${row.itemName}"`,
+          row.qty,
+          row.unitPrice,
+          row.totalAmount,
+          `"${row.payment}"`,
+          `"${row.vendor}"`
+        ].join(",") + "\r\n";
+      });
+      csvContent += `,,,,,,,,"Invoice Total (${invNo})",${invTotal},,\r\n`;
+    }
+
+    let encodedUri = encodeURI(csvContent);
+    let link = document.createElement("a");
+    link.setAttribute("href", encodedUri);
+    link.setAttribute("download", `Norvik_Hospital_Department_Invoices.csv`);
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  }
+
+  // Master Inventory & History Modals
   function openInventoryModal() {
     if(!isBiomedAuthorized) {
-      let pwd = prompt("Enter Password to view/edit Inventory (Norvik1234):");
+      let pwd = prompt("Enter Password:");
       if(pwd !== "Norvik1234") {
         alert("Incorrect Password! Access Denied.");
         return;
@@ -869,40 +1133,17 @@
       dataToShow = inventory.filter(item => item.dept === filterDept);
       modalTitle.innerText = `📄 Norvik Equipment Inventory - ${filterDept} (${dataToShow.length} Items)`;
     } else {
-      modalTitle.innerText = `📄 Norvik Hospital Full Equipment Inventory Master Data - All Departments (${inventory.length} Items)`;
+      modalTitle.innerText = `📄 Norvik Hospital Full Equipment Inventory Master Data (${inventory.length} Items)`;
     }
 
     invTbody.innerHTML = "";
-    if (dataToShow.length === 0) {
-      invTbody.innerHTML = `<tr><td colspan="8" style="text-align:center; padding:15px;">No equipment found in this department.</td></tr>`;
-      return;
-    }
-
     dataToShow.forEach((item, index) => {
       let globalIndex = inventory.findIndex(inv => inv.id === item.id && inv.name === item.name && inv.dept === item.dept);
       let tr = document.createElement("tr");
       tr.innerHTML = `
         <td>${index + 1}</td>
         <td><input type="text" value="${item.id}" onchange="updateInventoryField(${globalIndex}, 'id', this.value)"></td>
-        <td>
-          <select onchange="updateInventoryField(${globalIndex}, 'dept', this.value)">
-            <option value="01. LABORATORY DEPARTMENT" ${item.dept==='01. LABORATORY DEPARTMENT'?'selected':''}>01. LABORATORY DEPARTMENT</option>
-            <option value="02. RADIOLOGICAL DEPARTMENT" ${item.dept==='02. RADIOLOGICAL DEPARTMENT'?'selected':''}>02. RADIOLOGICAL DEPARTMENT</option>
-            <option value="03. EMERGENCY DEPARTMENT" ${item.dept==='03. EMERGENCY DEPARTMENT'?'selected':''}>03. EMERGENCY DEPARTMENT</option>
-            <option value="04. SCANNING DEPARTMENT" ${item.dept==='04. SCANNING DEPARTMENT'?'selected':''}>04. SCANNING DEPARTMENT</option>
-            <option value="05. ANTENATAL TRIAGE DEPARTMENT" ${item.dept==='05. ANTENATAL TRIAGE DEPARTMENT'?'selected':''}>05. ANTENATAL TRIAGE DEPARTMENT</option>
-            <option value="06. ICU DEPARTMENT" ${item.dept==='06. ICU DEPARTMENT'?'selected':''}>06. ICU DEPARTMENT</option>
-            <option value="07. INPATIENT DEPARTMENT" ${item.dept==='07. INPATIENT DEPARTMENT'?'selected':''}>07. INPATIENT DEPARTMENT</option>
-            <option value="08. NICU DEPARTMENT" ${item.dept==='08. NICU DEPARTMENT'?'selected':''}>08. NICU DEPARTMENT</option>
-            <option value="09. MATERNITY WARD" ${item.dept==='09. MATERNITY WARD'?'selected':''}>09. MATERNITY WARD</option>
-            <option value="10. DIALYSIS DEPARTMENT" ${item.dept==='10. DIALYSIS DEPARTMENT'?'selected':''}>10. DIALYSIS DEPARTMENT</option>
-            <option value="11. PHYSIOTHERAPY DEPARTMENT" ${item.dept==='11. PHYSIOTHERAPY DEPARTMENT'?'selected':''}>11. PHYSIOTHERAPY DEPARTMENT</option>
-            <option value="12. OPERATION THEATRE (OT) DEPARTMENT" ${item.dept==='12. OPERATION THEATRE (OT) DEPARTMENT'?'selected':''}>12. OPERATION THEATRE (OT) DEPARTMENT</option>
-            <option value="13. DAY CARE DEPARTMENT" ${item.dept==='13. DAY CARE DEPARTMENT'?'selected':''}>13. DAY CARE DEPARTMENT</option>
-            <option value="14. MANIFOLD ROOM" ${item.dept==='14. MANIFOLD ROOM'?'selected':''}>14. MANIFOLD ROOM</option>
-            <option value="15. BIOMEDICAL WORKSHOP" ${item.dept==='15. BIOMEDICAL WORKSHOP'?'selected':''}>15. BIOMEDICAL WORKSHOP</option>
-          </select>
-        </td>
+        <td><input type="text" value="${item.dept}" onchange="updateInventoryField(${globalIndex}, 'dept', this.value)"></td>
         <td><input type="text" value="${item.name}" onchange="updateInventoryField(${globalIndex}, 'name', this.value)"></td>
         <td><input type="text" value="${item.company}" onchange="updateInventoryField(${globalIndex}, 'company', this.value)"></td>
         <td><input type="text" value="${item.model}" onchange="updateInventoryField(${globalIndex}, 'model', this.value)"></td>
@@ -918,6 +1159,7 @@
     if(inventory[index]) {
       inventory[index][field] = value;
       saveMasterInventory(inventory);
+      populateDatalists();
     }
   }
 
@@ -937,24 +1179,67 @@
     let inventory = getMasterInventory();
     inventory.unshift({ dept, id, name, company, model, serial });
     saveMasterInventory(inventory);
-
-    document.getElementById("newAssetId").value = "";
-    document.getElementById("newAssetName").value = "";
-    document.getElementById("newAssetCompany").value = "";
-    document.getElementById("newAssetModel").value = "";
-    document.getElementById("newAssetSerial").value = "";
-
-    alert("✅ Equipment added to Master Inventory successfully!");
+    alert("✅ Equipment added successfully!");
+    populateDatalists();
     renderInventoryTable();
   }
 
   function deleteInventoryItem(index) {
-    if (confirm("Are you sure you want to remove this equipment from Master Inventory?")) {
+    if (confirm("Are you sure?")) {
       let inventory = getMasterInventory();
       inventory.splice(index, 1);
       saveMasterInventory(inventory);
+      populateDatalists();
       renderInventoryTable();
     }
+  }
+
+  function openMachineHistoryModal() {
+    document.getElementById("historyModal").style.display = "block";
+    document.getElementById("historySearchInput").value = "";
+    populateDatalists();
+    filterMachineHistory();
+  }
+
+  function closeMachineHistoryModal() {
+    document.getElementById("historyModal").style.display = "none";
+  }
+
+  function filterMachineHistory() {
+    let query = document.getElementById("historySearchInput").value.toLowerCase().trim();
+    let complaints = JSON.parse(localStorage.getItem("biomedical_records") || "[]");
+    let tbody = document.getElementById("historyTableBody");
+
+    let matched = complaints;
+    if (query !== "") {
+      matched = complaints.filter(c => c.machine.toLowerCase().includes(query) || c.dept.toLowerCase().includes(query) || c.id.toLowerCase().includes(query));
+    }
+
+    tbody.innerHTML = "";
+    if (matched.length === 0) {
+      tbody.innerHTML = `<tr><td colspan="9" style="text-align:center; padding:20px; opacity:0.7;">No matching machine breakdown history found.</td></tr>`;
+      return;
+    }
+
+    matched.forEach(item => {
+      let tr = document.createElement("tr");
+      tr.innerHTML = `
+        <td><b>${item.id}</b></td>
+        <td>${item.dept}</td>
+        <td><b>${item.machine}</b></td>
+        <td>${item.incharge || 'N/A'}</td>
+        <td>${item.date}</td>
+        <td>${item.problem}</td>
+        <td><b>${item.status}</b></td>
+        <td>${item.solvingDate ? item.solvingDate.replace("T", " ") : '-'}</td>
+        <td>${item.remarks || '-'}</td>
+      `;
+      tbody.appendChild(tr);
+    });
+  }
+
+  function printPDFReport() {
+    window.print();
   }
 
   function updateStatus(index, field, value) {
@@ -967,7 +1252,7 @@
 
   function deleteRecord(index) {
     if(!isBiomedAuthorized) return;
-    if(confirm("Are you sure you want to delete this complaint record permanently?")) {
+    if(confirm("Delete record permanently?")) {
       let complaints = JSON.parse(localStorage.getItem("biomedical_records") || "[]");
       complaints.splice(index, 1);
       localStorage.setItem("biomedical_records", JSON.stringify(complaints));
@@ -977,35 +1262,14 @@
 
   function exportToCSV() {
     let filtered = getFilteredComplaints();
-    if(filtered.length === 0) { 
-      alert("No data available to download for this selection!"); 
-      return; 
-    }
-
-    const filterDeptName = document.getElementById("filterDept").value || "All_Departments";
-    const filterMonthVal = document.getElementById("filterMonth").value || "All_Months";
-
-    let csvContent = "data:text/csv;charset=utf-8,Serial No,Hospital,Department,Machine Name,Incharge Name,Complaint Date,Problem,Status,Solving Date,Remarks\n";
-    
-    filtered.forEach(row => {
-      csvContent += [
-        row.id, 
-        "NORVIK HOSPITAL LTD", 
-        `"${row.dept}"`, 
-        `"${row.machine}"`, 
-        `"${row.incharge || 'N/A'}"`, 
-        `"${row.date}"`, 
-        `"${row.problem.replace(/"/g, '""')}"`, 
-        row.status, 
-        `"${(row.solvingDate || '').replace("T", " ")}"`, 
-        `"${(row.remarks || '').replace(/"/g, '""')}"`
-      ].join(",") + "\r\n";
+    if(filtered.length === 0) { alert("No data!"); return; }
+    let csvContent = "data:text/csv;charset=utf-8,Serial No,Hospital,Department,Machine,Incharge,Date,Problem,Status,Solving Date,Remarks\n";
+    filtered.forEach(r => {
+      csvContent += [r.id, "NORVIK HOSPITAL LTD", `"${r.dept}"`, `"${r.machine}"`, `"${r.incharge}"`, `"${r.date}"`, `"${r.problem}"`, r.status, `"${r.solvingDate}"`, `"${r.remarks}"`].join(",") + "\r\n";
     });
-
-    let encodedUri = encodeURI(csvContent);
     let link = document.createElement("a");
-    link.setAttribute("href", encodedUri);
-    link.setAttribute("download", `Norvik_Report_${filterDeptName.replace(/[^a-zA-Z0-9]/g, '_')}_${filterMonthVal}.csv`);
+    link.setAttribute("href", encodeURI(csvContent));
+    link.setAttribute("download", `Norvik_Breakdown_Report.csv`);
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
